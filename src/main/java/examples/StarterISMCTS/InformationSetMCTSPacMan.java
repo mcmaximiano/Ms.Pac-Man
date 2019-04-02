@@ -51,6 +51,7 @@ public class InformationSetMCTSPacMan extends PacmanController implements Drawab
         this.maxRolloutDepth = maxRolloutDepth;
     }
 
+    @SuppressWarnings("Duplicates")
     @Override
     public MOVE getMove(Game game, long timeDue) {
         if(currentMaze != game.getCurrentMaze()){
@@ -106,6 +107,7 @@ public class InformationSetMCTSPacMan extends PacmanController implements Drawab
                 });
             }
         }
+
         ISNode root = new ISNode(this, game);
         while (System.currentTimeMillis() < timeDue) {
             // Determinise and form a game state!
