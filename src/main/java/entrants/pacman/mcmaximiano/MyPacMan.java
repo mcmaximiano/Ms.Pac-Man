@@ -10,6 +10,8 @@ import prediction.fast.GhostPredictionsFast;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.LinkedList;
+
 
 import pacman.game.internal.Maze;
 
@@ -29,6 +31,7 @@ public class MyPacMan extends PacmanController {
     private PillModel pillModel;
     private int[] ghostEdibleTime;
     private Game mostRecentGame;
+    private int maxTreeDepth = 40;
 
     public MOVE getMove(Game game, long timeDue) {
 
@@ -89,11 +92,33 @@ public class MyPacMan extends PacmanController {
                 });
             }
         }
-        //Now we have the game modeled! Next comes MCTS
+        //Now we have the game modeled! Next comes MCTS:
 
-        
+        // Selection
 
 
+        // Expansion
+
+        // Play-out
+
+        // Back-propagate
+
+
+
+        predictions.update();
+
+        // myMove = best move
         return myMove;
     }
+}
+
+class Node {
+
+    private final MyPacMan MyPacMan;
+    private Node parent;
+    private MOVE prevMove;
+    private MOVE[] legalMoves;
+    private Node[] children;
+
+
 }

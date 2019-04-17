@@ -3,11 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ea20f124-1075-448d-a73b-0788ca11aff4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/examples/StarterISMCTS/InformationSetMCTSPacMan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/examples/StarterISMCTS/InformationSetMCTSPacMan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Main.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/entrants/pacman/mcmaximiano/MyPacMan.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/entrants/pacman/mcmaximiano/MyPacMan.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/examples/StarterISMCTS/ISNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/examples/StarterISMCTS/ISNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/examples/StarterISMCTS/InformationSetMCTSPacMan.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/examples/StarterISMCTS/InformationSetMCTSPacMan.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,12 +17,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="49" column="127" selection-start-line="49" selection-start-column="127" selection-end-line="49" selection-end-column="127" />
+            <state relative-caret-position="464">
+              <caret line="47" column="40" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="49" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -33,11 +33,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
+            <state relative-caret-position="359">
+              <caret line="42" column="7" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#365#396#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,12 +45,22 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/examples/StarterISMCTS/InformationSetMCTSPacMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="100" column="33" lean-forward="true" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
+            <state relative-caret-position="374">
+              <caret line="228" column="87" lean-forward="true" selection-start-line="228" selection-start-column="87" selection-end-line="228" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1553#1584#0" expanded="true" />
+                <element signature="e#10203#10204#0" expanded="true" />
+                <element signature="e#10286#10287#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/prediction/fast/GhostPredictionsFast.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="121">
+              <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -60,7 +69,7 @@
         <entry file="jar://$MAVEN_REPOSITORY$/uk/co/pacmanvghosts/pacman-main/2.0.1.0/pacman-main-2.0.1.0-sources.jar!/pacman/game/Game.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="225">
-              <caret line="1256" column="9" lean-forward="true" selection-start-line="1256" selection-start-column="9" selection-end-line="1256" selection-end-column="9" />
+              <caret line="1256" column="9" selection-start-line="1256" selection-start-column="9" selection-end-line="1256" selection-end-column="9" />
               <folding>
                 <element signature="e#32644#32645#0" expanded="true" />
                 <element signature="e#32681#32682#0" expanded="true" />
@@ -76,7 +85,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/examples/StarterPacMan/MyPacMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
+            <state relative-caret-position="289">
               <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
             </state>
           </provider>
@@ -93,15 +102,16 @@
         <option value="$PROJECT_DIR$/src/main/java/examples/StarterPacMan/MyPacMan.java" />
         <option value="$PROJECT_DIR$/src/main/java/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/examples/StarterISMCTS/InformationSetMCTSPacMan.java" />
+        <option value="$PROJECT_DIR$/src/main/java/prediction/fast/GhostPredictionsFast.java" />
         <option value="$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="15" />
     <option name="y" value="30" />
     <option name="width" value="1890" />
-    <option name="height" value="1160" />
+    <option name="height" value="1161" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -110,105 +120,14 @@
     </navigator>
     <panes>
       <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane" />
-      <pane id="Scope">
-        <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
-          <expand>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="entrants" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="entrants" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="pacman" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="entrants" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="pacman" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="mcmaximiano" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="examples" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="examples" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="StarterISMCTS" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="examples" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="StarterISMCTS" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="InformationSetMCTSPacMan.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="mcmaximiano" type="2674bda8:ScopeViewTreeModel$GroupNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="main" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="java" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="examples" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="StarterPacMan" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1554212352561" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1555502232042" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
@@ -253,46 +172,47 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1553598550295</updated>
-      <workItem from="1553598571967" duration="15938000" />
+      <workItem from="1553598571967" duration="17264000" />
+      <workItem from="1555063521584" duration="4402000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15938000" />
+    <option name="totallyTimeSpent" value="21666000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="828" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23724696" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24129555" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" weight="0.2025862" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25431034" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.25431034" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Database" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.2025862" />
+      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Database" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info anchor="right" id="Maven" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -380,33 +300,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/uk/co/pacmanvghosts/pacman-main/2.0.1.0/pacman-main-2.0.1.0-sources.jar!/pacman/Executor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="310">
-          <caret line="55" column="43" lean-forward="true" selection-start-line="55" selection-start-column="43" selection-end-line="55" selection-end-column="43" />
-          <folding>
-            <element signature="method#setupGame#0;class#Executor#0" />
-            <element signature="method#runExperimentTicks#0;class#Executor#0" />
-            <element signature="method#runGame#0;class#Executor#0" />
-            <element signature="method#setupGameView#0;class#Executor#0" />
-            <element signature="method#runGameTimedSpeedOptimised#0;class#Executor#0" />
-            <element signature="method#runGameTimedRecorded#0;class#Executor#0" />
-            <element signature="method#replayGame#0;class#Executor#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/uk/co/pacmanvghosts/pacman-main/2.0.1.0/pacman-main-2.0.1.0-sources.jar!/pacman/game/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="164">
           <caret line="47" column="28" selection-start-line="47" selection-start-column="28" selection-end-line="47" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/examples/StarterPacMan/MyPacMan.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -421,20 +318,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/examples/StarterPacMan/MyPacMan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="49" column="127" selection-start-line="49" selection-start-column="127" selection-end-line="49" selection-end-column="127" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="23" column="55" selection-start-line="23" selection-start-column="55" selection-end-line="23" selection-end-column="55" />
         </state>
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/uk/co/pacmanvghosts/pacman-main/2.0.1.0/pacman-main-2.0.1.0-sources.jar!/pacman/game/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
-          <caret line="1256" column="9" lean-forward="true" selection-start-line="1256" selection-start-column="9" selection-end-line="1256" selection-end-column="9" />
+          <caret line="1256" column="9" selection-start-line="1256" selection-start-column="9" selection-end-line="1256" selection-end-column="9" />
           <folding>
             <element signature="e#32644#32645#0" expanded="true" />
             <element signature="e#32681#32682#0" expanded="true" />
@@ -448,29 +342,55 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/prediction/fast/GhostPredictionsFast.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="49" column="16" selection-start-line="49" selection-start-column="16" selection-end-line="49" selection-end-column="16" />
+        <state relative-caret-position="121">
+          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/uk/co/pacmanvghosts/pacman-main/2.0.1.0/pacman-main-2.0.1.0-sources.jar!/pacman/Executor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="237" column="112" selection-start-line="237" selection-start-column="103" selection-end-line="237" selection-end-column="112" />
+          <folding>
+            <element signature="method#setupGame#0;class#Executor#0" />
+            <element signature="method#runExperimentTicks#0;class#Executor#0" />
+            <element signature="method#runGame#0;class#Executor#0" />
+            <element signature="method#setupGameView#0;class#Executor#0" />
+            <element signature="method#runGameTimedSpeedOptimised#0;class#Executor#0" />
+            <element signature="method#runGameTimedRecorded#0;class#Executor#0" />
+            <element signature="method#replayGame#0;class#Executor#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="464">
+          <caret line="47" column="40" selection-start-line="47" selection-start-column="36" selection-end-line="47" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/examples/StarterISMCTS/InformationSetMCTSPacMan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="100" column="33" lean-forward="true" selection-start-line="100" selection-start-column="33" selection-end-line="100" selection-end-column="33" />
+        <state relative-caret-position="374">
+          <caret line="228" column="87" lean-forward="true" selection-start-line="228" selection-start-column="87" selection-end-line="228" selection-end-column="87" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1553#1584#0" expanded="true" />
+            <element signature="e#10203#10204#0" expanded="true" />
+            <element signature="e#10286#10287#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="95" lean-forward="true" selection-start-line="95" selection-end-line="95" />
+        <state relative-caret-position="359">
+          <caret line="42" column="7" selection-start-line="42" selection-start-column="7" selection-end-line="42" selection-end-column="7" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#365#396#0" expanded="true" />
           </folding>
         </state>
       </provider>
