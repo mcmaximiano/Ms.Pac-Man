@@ -114,7 +114,7 @@ public class MyPacMan extends PacmanController {
 
 class Node {
 
-    private final MyPacMan MyPacMan;
+    //private final MyPacMan MyPacMan;
     private Node parent;
     private MOVE prevMove;
     private MOVE[] legalMoves;

@@ -9,8 +9,5 @@
         <module name="mcmaximiano" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="mcmaximiano" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
