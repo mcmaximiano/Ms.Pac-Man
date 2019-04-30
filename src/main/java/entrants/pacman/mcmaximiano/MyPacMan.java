@@ -30,8 +30,15 @@ public class MyPacMan extends PacmanController {
     private GhostPredictionsFast predictions;
     private PillModel pillModel;
     private int[] ghostEdibleTime;
-    private Game mostRecentGame;
-    private int maxTreeDepth = 40;
+    protected Game mostRecentGame;
+    protected int maxTreeDepth;
+    protected int maxRolloutDepth;
+
+    public MyPacMan() {
+        ghostEdibleTime = new int[Constants.GHOST.values().length];
+        maxTreeDepth = 40;
+        maxRolloutDepth = 200;
+    }
 
     public MOVE getMove(Game game, long timeDue) {
 
@@ -94,10 +101,9 @@ public class MyPacMan extends PacmanController {
         }
         //Now we have the game modeled! Next comes MCTS:
 
-        // Selection
+        // Select
 
-
-        // Expansion
+        // Expand
 
         // Play-out
 
@@ -114,11 +120,61 @@ public class MyPacMan extends PacmanController {
 
 class Node {
 
-    //private final MyPacMan MyPacMan;
+    private final MyPacMan MyPacMan;
     private Node parent;
     private MOVE prevMove;
     private MOVE[] legalMoves;
     private Node[] children;
+    private int expandedChildren;
 
+    private int visits;
+    private double score;
+    private int treeDepth;
 
+    /* Constructors */
+    public Node(MyPacMan MyPacMan, Game game) { //Constructor for root node
+        this.MyPacMan = MyPacMan;
+        treeDepth = 0;
+        this.legalMoves = getLegalMovesNotIncludingBackwards(game);
+        this.children = new Node[legalMoves.length];
+    }
+
+    public Node (Node parent, MOVE previousMove, MOVE[] legalMoves) { //Constructor for child node
+        this.MyPacMan = parent.MyPacMan;
+        this.parent = parent;
+        this.treeDepth = parent.treeDepth + 1;
+        this.prevMove = previousMove;
+        this.legalMoves = legalMoves;
+        this.children = new Node[legalMoves.length];
+    }
+
+    /* MCTS methods */
+    public Node select (Game game){
+        Node current = this;
+        while (current.treeDepth < MyPacMan.maxTreeDepth && !game.gameOver()){
+            if(current.isFullyExpanded()){
+                current = current.selectBestChild();
+                game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is simple
+                //game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is random
+            }
+            else {
+                current = current.expand(game);
+                game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is simple
+                //game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is random
+                return current;
+            }
+        }
+        return current;
+    }
+
+    /* Auxiliar methods */
+    protected MOVE[] getLegalMovesNotIncludingBackwards(Game game) {
+        return game.getCurrentMaze().graph[game.getPacmanCurrentNodeIndex()].allPossibleMoves.get(game.getPacmanLastMoveMade());
+    }
+
+    protected MOVE[] getAllLegalMoves(Game game) {
+        Maze maze = game.getCurrentMaze();
+        int index = game.getPacmanCurrentNodeIndex();
+        return maze.graph[index].neighbourhood.keySet().toArray(new MOVE[maze.graph[index].neighbourhood.keySet().size()]);
+    }
 }
