@@ -7,8 +7,8 @@ import examples.StarterGhostComm.Sue;
 
 /* Choose PacMan here */
 import examples.StarterISMCTS.InformationSetMCTSPacMan;
-//import entrants.pacman.mcmaximiano.MyPacMan;
-import examples.StarterPacMan.MyPacMan;
+import entrants.pacman.mcmaximiano.MyPacMan;
+//import examples.StarterPacMan.MyPacMan;
 
 
 import pacman.Executor;
@@ -39,12 +39,12 @@ public class Main {
         controllers.put(GHOST.PINKY, new Pinky());
         controllers.put(GHOST.SUE, new Sue());
 
-        /* For Developing MyPacMan */
+        /* For Developing MyPacMan * /
         executor.runGameTimed(new MyPacMan(), new MASController(controllers));
         /** /
         executor.runGameTimed(new InformationSetMCTSPacMan(), new MASController(controllers));
 
-        /* For mass testing * /
+        /* For mass testing */
         System.out.println(executor.runExperiment(new MyPacMan(), new MASController(controllers), 5, "Starter PM")[0].toString());
         /** /
         System.out.println(executor.runExperiment(new InformationSetMCTSPacMan(), new MASController(controllers), 5, "ISMCTS PM")[0].toString());

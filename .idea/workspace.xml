@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ad23a3d7-7db2-4420-92d0-6e3dc3f53827" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/M.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -18,17 +21,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="167" column="5" lean-forward="true" selection-start-line="167" selection-start-column="5" selection-end-line="167" selection-end-column="5" />
+            <state relative-caret-position="324">
+              <caret line="117" selection-start-line="117" selection-end-line="117" />
               <folding>
-                <element signature="method#MyPacMan#0;class#MyPacMan#0" />
+                <element signature="method#obtainDeterminisedState#0;class#MyPacMan#0" />
                 <element signature="method#Node#0;class#Node#0" />
                 <element signature="method#Node#1;class#Node#0" />
+                <element signature="method#playout#0;class#Node#0" />
                 <element signature="method#getLegalMovesNotIncludingBackwards#0;class#Node#0" />
                 <element signature="method#getAllLegalMoves#0;class#Node#0" />
+                <element signature="method#getBasicGhostMoves#0;class#Node#0" />
+                <element signature="method#expand#0;class#Node#0" />
+                <element signature="method#selectBestMove#0;class#Node#0" />
               </folding>
             </state>
           </provider>
@@ -37,22 +44,25 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/examples/StarterISMCTS/InformationSetMCTSPacMan.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2215">
-              <caret line="326" column="50" selection-start-line="326" selection-start-column="50" selection-end-line="326" selection-end-column="50" />
+            <state relative-caret-position="1740">
+              <caret line="288" column="75" selection-start-line="288" selection-start-column="60" selection-end-line="288" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="method#getMove#0;class#InformationSetMCTSPacMan#0" />
                 <element signature="method#draw#0;class#InformationSetMCTSPacMan#0" />
+                <element signature="e#10125#10126#0" expanded="true" />
+                <element signature="e#10162#10163#0" expanded="true" />
+                <element signature="e#10203#10204#0" expanded="true" />
+                <element signature="e#10286#10287#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="255">
+              <caret line="39" column="41" lean-forward="true" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -68,8 +78,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/examples/StarterISMCTS/InformationSetMCTSPacMan.java" />
         <option value="$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Main.java" />
       </list>
     </option>
   </component>
@@ -141,16 +152,6 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="entrants" type="462c0819:PsiDirectoryNode" />
               <item name="mcmaximiano" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="mcmaximiano" type="b2602c69:ProjectViewProjectNode" />
-              <item name="source" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="entrants" type="462c0819:PsiDirectoryNode" />
-              <item name="mcmaximiano" type="462c0819:PsiDirectoryNode" />
-              <item name="MyPacMan.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
             <path>
               <item name="mcmaximiano" type="b2602c69:ProjectViewProjectNode" />
@@ -249,7 +250,7 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20404859" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15546559" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
@@ -257,7 +258,7 @@
       <window_info anchor="bottom" id="Messages" weight="0.21551724" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.25" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.25" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -277,16 +278,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="318">
           <caret line="110" column="47" lean-forward="true" selection-start-line="110" selection-start-column="47" selection-end-line="110" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -321,33 +312,50 @@
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/uk/co/pacmanvghosts/pacman-main/2.0.1.0/pacman-main-2.0.1.0-sources.jar!/pacman/game/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
+        <state relative-caret-position="-192">
           <caret line="534" column="16" selection-start-line="534" selection-start-column="16" selection-end-line="534" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/examples/StarterISMCTS/InformationSetMCTSPacMan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2215">
-          <caret line="326" column="50" selection-start-line="326" selection-start-column="50" selection-end-line="326" selection-end-column="50" />
+        <state relative-caret-position="1740">
+          <caret line="288" column="75" selection-start-line="288" selection-start-column="60" selection-end-line="288" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#getMove#0;class#InformationSetMCTSPacMan#0" />
             <element signature="method#draw#0;class#InformationSetMCTSPacMan#0" />
+            <element signature="e#10125#10126#0" expanded="true" />
+            <element signature="e#10162#10163#0" expanded="true" />
+            <element signature="e#10203#10204#0" expanded="true" />
+            <element signature="e#10286#10287#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/entrants/pacman/mcmaximiano/MyPacMan.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="167" column="5" lean-forward="true" selection-start-line="167" selection-start-column="5" selection-end-line="167" selection-end-column="5" />
+        <state relative-caret-position="324">
+          <caret line="117" selection-start-line="117" selection-end-line="117" />
           <folding>
-            <element signature="method#MyPacMan#0;class#MyPacMan#0" />
+            <element signature="method#obtainDeterminisedState#0;class#MyPacMan#0" />
             <element signature="method#Node#0;class#Node#0" />
             <element signature="method#Node#1;class#Node#0" />
+            <element signature="method#playout#0;class#Node#0" />
             <element signature="method#getLegalMovesNotIncludingBackwards#0;class#Node#0" />
             <element signature="method#getAllLegalMoves#0;class#Node#0" />
+            <element signature="method#getBasicGhostMoves#0;class#Node#0" />
+            <element signature="method#expand#0;class#Node#0" />
+            <element signature="method#selectBestMove#0;class#Node#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="39" column="41" lean-forward="true" selection-start-line="39" selection-start-column="41" selection-end-line="39" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

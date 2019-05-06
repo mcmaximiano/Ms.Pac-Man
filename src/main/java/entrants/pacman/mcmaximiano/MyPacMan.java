@@ -4,13 +4,19 @@ import pacman.controllers.PacmanController;
 import pacman.game.Constants;
 import pacman.game.Constants.MOVE;
 import pacman.game.Game;
+import pacman.game.info.GameInfo;
+import pacman.game.internal.Ghost;
+import pacman.game.internal.PacMan;
 import prediction.GhostLocation;
 import prediction.PillModel;
 import prediction.fast.GhostPredictionsFast;
 
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.Random;
+
 
 
 import pacman.game.internal.Maze;
@@ -31,16 +37,14 @@ public class MyPacMan extends PacmanController {
     private PillModel pillModel;
     private int[] ghostEdibleTime;
     protected Game mostRecentGame;
-    protected int maxTreeDepth;
-    protected int maxRolloutDepth;
+    protected int maxTreeDepth = 40; //Should play around with different values and compare results
+    protected int maxPlayoutDepth = 200; //Should play around with different values and compare results
 
     public MyPacMan() {
         ghostEdibleTime = new int[Constants.GHOST.values().length];
-        maxTreeDepth = 40;
-        maxRolloutDepth = 200;
     }
 
-    public MOVE getMove(Game game, long timeDue) {
+    public MOVE getMove(Game game, long timeToDecide) {
 
         //We need a model of the game! Do this:
         if (currentMaze != game.getCurrentMaze()){
@@ -100,21 +104,39 @@ public class MyPacMan extends PacmanController {
             }
         }
         //Now we have the game modeled! Next comes MCTS:
-
-        // Select
-
-        // Expand
-
-        // Play-out
-
-        // Back-propagate
-
-
-
+        Node root = new Node(this, game);
+        while(System.currentTimeMillis() < timeToDecide) {
+            Game copy = obtainDeterminisedState(game); //MCTS can't deal with PO by itself. We give it a copy of the game without PO, so MCTS thinks it sees everything
+            //Select & Expand
+            Node node = root.select_expand(copy); //This method fully expands the current node and then selects the best child
+            // Play-out
+            double gameScore = node.playout(copy);
+            // Back-propagate
+            node.backPropagate(gameScore);
+        }
         predictions.update();
 
-        // myMove = best move
-        return myMove;
+        return root.selectBestMove();
+    }
+
+    private Game obtainDeterminisedState(Game game) {
+        GameInfo info = game.getPopulatedGameInfo();
+        info.setPacman(new PacMan(game.getPacmanCurrentNodeIndex(), game.getPacmanLastMoveMade(), 0, false));
+        EnumMap<Constants.GHOST, GhostLocation> locations = predictions.sampleLocations();
+        info.fixGhosts(ghost -> {
+            GhostLocation location = locations.get(ghost);
+            if (location != null) {
+                int edibleTime = ghostEdibleTime[ghost.ordinal()];
+                return new Ghost(ghost, location.getIndex(), edibleTime, 0, location.getLastMoveMade());
+            } else {
+                return new Ghost(ghost, game.getGhostInitialNodeIndex(), 0, 0, MOVE.NEUTRAL);
+            }
+        });
+
+        for (int i = 0; i < pillModel.getPills().length(); i++) {
+            info.setPillAtIndex(i, pillModel.getPills().get(i));
+        }
+        return game.getGameFromInfo(info);
     }
 }
 
@@ -149,7 +171,7 @@ class Node {
     }
 
     /* MCTS methods */
-    public Node select (Game game){
+    public Node select_expand (Game game){
         Node current = this;
         while (current.treeDepth < MyPacMan.maxTreeDepth && !game.gameOver()){
             if(current.isFullyExpanded()){
@@ -157,15 +179,39 @@ class Node {
                 game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is simple
                 //game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is random
             }
-            else {
+            else { //Should expand all children before choosing the best one
                 current = current.expand(game);
                 game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is simple
-                //game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is random
                 return current;
             }
         }
         return current;
     }
+
+    public double playout(Game game) {
+        int depth = treeDepth;
+        Random random = new Random();
+        while (depth < MyPacMan.maxPlayoutDepth) {
+            if (game.gameOver()) break;
+            MOVE[] legalMoves = getLegalMovesNotIncludingBackwards(game);
+            MOVE randomMove = legalMoves[random.nextInt(legalMoves.length)];
+            game.advanceGame(randomMove, getBasicGhostMoves(game));
+            depth++;
+        }
+        return calculateGameScore(game);
+    }
+
+    public void backPropagate(double value) {
+        Node current = this;
+        while (current.parent != null) {
+            current.visits++;
+            current.score += value;
+            current = current.parent;
+        }
+        // Root node
+        current.visits++;
+    }
+
 
     /* Auxiliar methods */
     protected MOVE[] getLegalMovesNotIncludingBackwards(Game game) {
@@ -176,5 +222,98 @@ class Node {
         Maze maze = game.getCurrentMaze();
         int index = game.getPacmanCurrentNodeIndex();
         return maze.graph[index].neighbourhood.keySet().toArray(new MOVE[maze.graph[index].neighbourhood.keySet().size()]);
+    }
+
+    protected EnumMap<Constants.GHOST, MOVE> getBasicGhostMoves(Game game) {
+        EnumMap<Constants.GHOST, MOVE> moves = new EnumMap<>(Constants.GHOST.class);
+        int pacmanLocation = game.getPacmanCurrentNodeIndex();
+        for (Constants.GHOST ghost : Constants.GHOST.values()) {
+            int index = game.getGhostCurrentNodeIndex(ghost);
+            MOVE previousMove = game.getGhostLastMoveMade(ghost);
+            if (game.isJunction(index)) {
+                try {
+                    MOVE move = (game.isGhostEdible(ghost))
+                            ? game.getApproximateNextMoveAwayFromTarget(index, pacmanLocation, previousMove, Constants.DM.PATH)
+                            : game.getNextMoveTowardsTarget(index, pacmanLocation, previousMove, Constants.DM.PATH);
+                    moves.put(ghost, move);
+                }catch(NullPointerException npe){
+                    System.err.println("PacmanLocation: " + pacmanLocation + " Maze Index: " + game.getMazeIndex() + " Last Move: " + previousMove);
+                }
+            } else {
+                moves.put(ghost, previousMove);
+            }
+        }
+        return moves;
+    }
+
+    private boolean isFullyExpanded(){
+        return children != null && children.length == expandedChildren;
+    }
+
+    public Node expand(Game game) {
+        // Select random unselected child
+        int index = -1; //Default value to avoid errors from not initializing
+        Random random = new Random();
+        double bestScore = -Double.MAX_VALUE;
+        for (int i = 0; i < children.length; i++) {
+            if (children[i] == null) { //Check that child #i hasn't been expanded before (just in case...)
+                double score = random.nextDouble();
+                if (score > bestScore) {
+                    index = i;
+                    bestScore = score;
+                }
+            }
+        }
+        expandedChildren++;
+
+        game.advanceGame(legalMoves[index], getBasicGhostMoves(game));
+
+        MOVE[] childMoves;
+        if(parent == null){ //This means it is the root node
+            childMoves = getAllLegalMoves(game);
+        }
+        else{ //If it's not the root, exclude backward movement
+            childMoves = getLegalMovesNotIncludingBackwards(game);
+        }
+
+        Node child = new Node(this, legalMoves[index], childMoves);
+        children[index] = child;
+        return child;
+    }
+
+    public Node selectBestChild() {
+        Node bestChild = null;
+        double bestScore = -Double.MAX_VALUE;
+        for (Node child : children) {
+            double score = child.calculateChildScore(); //The core of the selection
+            if (score > bestScore) {
+                bestChild = child;
+                bestScore = score;
+            }
+        }
+        return bestChild;
+    }
+
+
+    private double calculateChildScore(){ //Should play around with this and try to find the best formula
+        return (score / visits) + Math.sqrt(2 * Math.log((parent.visits + 1) / visits));
+    }
+
+    private double calculateGameScore(Game game){ //Should play around with this and try to find the best formula
+        return game.getScore() + game.getTotalTime() + (1000 * game.getCurrentLevel());
+    }
+
+    public MOVE selectBestMove() {
+        Node bestChild = null;
+        double bestScore = -Double.MAX_VALUE;
+        for (Node child : children) {
+            if (child == null) continue;
+            double score = child.score;
+            if (score > bestScore) {
+                bestChild = child;
+                bestScore = score;
+            }
+        }
+        return bestChild == null ? MOVE.NEUTRAL : bestChild.prevMove;
     }
 }
