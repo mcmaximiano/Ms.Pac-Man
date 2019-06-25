@@ -45,7 +45,7 @@ public class Main {
         executor.runGameTimed(new InformationSetMCTSPacMan(), new MASController(controllers));
 
         /* For mass testing */
-        System.out.println(executor.runExperiment(new MyPacMan(), new MASController(controllers), 5, "Starter PM")[0].toString());
+        System.out.println(executor.runExperiment(new MyPacMan(), new MASController(controllers), 30, "Starter PM")[0].toString());
         /** /
         System.out.println(executor.runExperiment(new InformationSetMCTSPacMan(), new MASController(controllers), 5, "ISMCTS PM")[0].toString());
 

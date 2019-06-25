@@ -46,12 +46,14 @@ public class MyPacMan extends PacmanController {
 
     public MOVE getMove(Game game, long timeToDecide) {
 
-        //We need a model of the game! Do this:
-        if (currentMaze != game.getCurrentMaze()){
+        //We need a model of the game! Do this to set initial state of the maze:
+        if (currentMaze != game.getCurrentMaze() /*|| mostRecentGame != game*/){
             currentMaze = game.getCurrentMaze();
             predictions = null;
             pillModel = null;
             System.out.println("New Maze");
+            int level = game.getCurrentLevel() + 1;
+            System.out.println("Level: " + level);
             Arrays.fill(ghostEdibleTime, -1);
         }
 
@@ -64,7 +66,7 @@ public class MyPacMan extends PacmanController {
         }
 
         if (predictions == null) {
-            predictions = new GhostPredictionsFast(game.getCurrentMaze());
+            predictions = new GhostPredictionsFast(game.getCurrentMaze()); //Predicts ghosts' movement
             predictions.preallocate();
         }
         if (pillModel == null) {
@@ -214,6 +216,7 @@ class Node {
 
 
     /* Auxiliar methods */
+
     protected MOVE[] getLegalMovesNotIncludingBackwards(Game game) {
         return game.getCurrentMaze().graph[game.getPacmanCurrentNodeIndex()].allPossibleMoves.get(game.getPacmanLastMoveMade());
     }
@@ -227,19 +230,19 @@ class Node {
     protected EnumMap<Constants.GHOST, MOVE> getBasicGhostMoves(Game game) {
         EnumMap<Constants.GHOST, MOVE> moves = new EnumMap<>(Constants.GHOST.class);
         int pacmanLocation = game.getPacmanCurrentNodeIndex();
-        for (Constants.GHOST ghost : Constants.GHOST.values()) {
-            int index = game.getGhostCurrentNodeIndex(ghost);
-            MOVE previousMove = game.getGhostLastMoveMade(ghost);
-            if (game.isJunction(index)) {
+        for (Constants.GHOST ghost : Constants.GHOST.values()) { //For each ghost...
+            int index = game.getGhostCurrentNodeIndex(ghost); //Get position of ghost in maze
+            MOVE previousMove = game.getGhostLastMoveMade(ghost); //Get last movement of ghost
+            if (game.isJunction(index)) { //If it's a junction, ghost might choose to turn
                 try {
                     MOVE move = (game.isGhostEdible(ghost))
-                            ? game.getApproximateNextMoveAwayFromTarget(index, pacmanLocation, previousMove, Constants.DM.PATH)
-                            : game.getNextMoveTowardsTarget(index, pacmanLocation, previousMove, Constants.DM.PATH);
+                            ? game.getApproximateNextMoveAwayFromTarget(index, pacmanLocation, previousMove, Constants.DM.PATH) //If ghost is edible, it moves away from PM
+                            : game.getNextMoveTowardsTarget(index, pacmanLocation, previousMove, Constants.DM.PATH); //If ghost is unedible, it moves towards PM
                     moves.put(ghost, move);
                 }catch(NullPointerException npe){
                     System.err.println("PacmanLocation: " + pacmanLocation + " Maze Index: " + game.getMazeIndex() + " Last Move: " + previousMove);
                 }
-            } else {
+            } else { //If it's not junction, ghost will continue forward (because reversing is not possible)
                 moves.put(ghost, previousMove);
             }
         }
@@ -266,7 +269,7 @@ class Node {
         }
         expandedChildren++;
 
-        game.advanceGame(legalMoves[index], getBasicGhostMoves(game));
+        game.advanceGame(legalMoves[index], getBasicGhostMoves(game)); //Assume ghosts' behaviour is simple
 
         MOVE[] childMoves;
         if(parent == null){ //This means it is the root node
