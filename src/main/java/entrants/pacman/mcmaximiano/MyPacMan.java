@@ -37,7 +37,7 @@ public class MyPacMan extends PacmanController {
     private PillModel pillModel;
     private int[] ghostEdibleTime;
     protected Game mostRecentGame;
-    protected int maxTreeDepth = 40; //Should play around with different values and compare results
+    protected int maxTreeDepth = 30; //Should play around with different values and compare results
     protected int maxPlayoutDepth = 200; //Should play around with different values and compare results
 
     public MyPacMan() {
