@@ -298,12 +298,13 @@ class Node {
     }
 
 
-    private double calculateChildScore(){ //Should play around with this and try to find the best formula
+    private double calculateChildScore(){ //Should play around with this and try to find the best formula (Doesn't matter, decided by calcuateGameScore)
         return (score / visits) + Math.sqrt(2 * Math.log((parent.visits + 1) / visits));
     }
 
     private double calculateGameScore(Game game){ //Should play around with this and try to find the best formula
-        return game.getScore() + game.getTotalTime() + (1000 * game.getCurrentLevel());
+        return game.getScore()*50 + game.getTotalTime() + (1000*game.getCurrentLevel());
+
     }
 
     public MOVE selectBestMove() {
