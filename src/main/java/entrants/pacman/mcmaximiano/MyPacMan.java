@@ -2,6 +2,7 @@ package entrants.pacman.mcmaximiano;
 
 import pacman.controllers.PacmanController;
 import pacman.game.Constants;
+import pacman.game.Constants.DM;
 import pacman.game.Constants.MOVE;
 import pacman.game.Game;
 import pacman.game.info.GameInfo;
@@ -118,7 +119,8 @@ public class MyPacMan extends PacmanController {
         }
         predictions.update();
 
-        return root.selectBestMove();
+        System.out.println(root.selectBestMove(game));
+        return root.selectBestMove(game);
     }
 
     private Game obtainDeterminisedState(Game game) {
@@ -159,11 +161,14 @@ class Node {
     public Node(MyPacMan MyPacMan, Game game) { //Constructor for root node
         this.MyPacMan = MyPacMan;
         treeDepth = 0;
+
         this.legalMoves = getLegalMovesNotIncludingBackwards(game);
+        //this.legalMoves = getAllLegalMoves(game);
+
         this.children = new Node[legalMoves.length];
     }
 
-    public Node (Node parent, MOVE previousMove, MOVE[] legalMoves) { //Constructor for child node
+    public Node(Node parent, MOVE previousMove, MOVE[] legalMoves) { //Constructor for child node
         this.MyPacMan = parent.MyPacMan;
         this.parent = parent;
         this.treeDepth = parent.treeDepth + 1;
@@ -173,15 +178,14 @@ class Node {
     }
 
     /* MCTS methods */
-    public Node select_expand (Game game){
+    public Node select_expand(Game game) {
         Node current = this;
-        while (current.treeDepth < MyPacMan.maxTreeDepth && !game.gameOver()){
-            if(current.isFullyExpanded()){
+        while (current.treeDepth < MyPacMan.maxTreeDepth && !game.gameOver()) {
+            if (current.isFullyExpanded()) {
                 current = current.selectBestChild();
                 game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is simple
                 //game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is random
-            }
-            else { //Should expand all children before choosing the best one
+            } else { //Should expand all children before choosing the best one
                 current = current.expand(game);
                 game.advanceGame(current.prevMove, getBasicGhostMoves(game)); //Assume ghosts' behaviour is simple
                 return current;
@@ -195,7 +199,8 @@ class Node {
         Random random = new Random();
         while (depth < MyPacMan.maxPlayoutDepth) {
             if (game.gameOver()) break;
-            MOVE[] legalMoves = getLegalMovesNotIncludingBackwards(game);
+            //MOVE[] legalMoves = getLegalMovesNotIncludingBackwards(game);
+            MOVE[] legalMoves = getAllLegalMoves(game);
             MOVE randomMove = legalMoves[random.nextInt(legalMoves.length)];
             game.advanceGame(randomMove, getBasicGhostMoves(game));
             depth++;
@@ -239,7 +244,7 @@ class Node {
                             ? game.getApproximateNextMoveAwayFromTarget(index, pacmanLocation, previousMove, Constants.DM.PATH) //If ghost is edible, it moves away from PM
                             : game.getNextMoveTowardsTarget(index, pacmanLocation, previousMove, Constants.DM.PATH); //If ghost is unedible, it moves towards PM
                     moves.put(ghost, move);
-                }catch(NullPointerException npe){
+                } catch (NullPointerException npe) {
                     System.err.println("PacmanLocation: " + pacmanLocation + " Maze Index: " + game.getMazeIndex() + " Last Move: " + previousMove);
                 }
             } else { //If it's not junction, ghost will continue forward (because reversing is not possible)
@@ -249,7 +254,7 @@ class Node {
         return moves;
     }
 
-    private boolean isFullyExpanded(){
+    private boolean isFullyExpanded() {
         return children != null && children.length == expandedChildren;
     }
 
@@ -272,11 +277,11 @@ class Node {
         game.advanceGame(legalMoves[index], getBasicGhostMoves(game)); //Assume ghosts' behaviour is simple
 
         MOVE[] childMoves;
-        if(parent == null){ //This means it is the root node
+        if (parent == null) { //This means it is the root node
             childMoves = getAllLegalMoves(game);
-        }
-        else{ //If it's not the root, exclude backward movement
+        } else { //If it's not the root, exclude backward movement
             childMoves = getLegalMovesNotIncludingBackwards(game);
+            //childMoves = getAllLegalMoves(game);
         }
 
         Node child = new Node(this, legalMoves[index], childMoves);
@@ -298,16 +303,16 @@ class Node {
     }
 
 
-    private double calculateChildScore(){ //Should play around with this and try to find the best formula (Doesn't matter, decided by calcuateGameScore)
+    private double calculateChildScore() { //Should play around with this and try to find the best formula (Doesn't matter, decided by calculateGameScore)
         return (score / visits) + Math.sqrt(2 * Math.log((parent.visits + 1) / visits));
     }
 
-    private double calculateGameScore(Game game){ //Should play around with this and try to find the best formula
-        return game.getScore()*50 + game.getTotalTime() + (1000*game.getCurrentLevel());
+    private double calculateGameScore(Game game) { //Should play around with this and try to find the best formula
+        return game.getScore() + game.getTotalTime() + (1000 * game.getCurrentLevel());
 
     }
 
-    public MOVE selectBestMove() {
+    public MOVE selectBestMove(Game game) {
         Node bestChild = null;
         double bestScore = -Double.MAX_VALUE;
         for (Node child : children) {
@@ -318,6 +323,85 @@ class Node {
                 bestScore = score;
             }
         }
-        return bestChild == null ? MOVE.NEUTRAL : bestChild.prevMove;
+
+        if (bestChild == null) {
+            return MOVE.NEUTRAL;
+        } else {
+            return getNextMove(bestChild, game);
+        }
+
+        //return bestChild == null ? MOVE.NEUTRAL : getNextMove(bestChild, game);
+        //return bestChild == null ? MOVE.NEUTRAL : bestChild.prevMove;
+    }
+
+    public MOVE getNextMove(Node child, Game game) {
+        //Trying new stuff
+        int[] ghostEdibleTimeMock;
+        MOVE nextMove = child.prevMove;
+        GhostPredictionsFast predictions;
+        ghostEdibleTimeMock = new int[Constants.GHOST.values().length];
+        Arrays.fill(ghostEdibleTimeMock, -1);
+        predictions = new GhostPredictionsFast(game.getCurrentMaze()); //Predicts ghosts' movement
+        predictions.preallocate();
+        for (Constants.GHOST ghost : Constants.GHOST.values()) {
+            if (ghostEdibleTimeMock[ghost.ordinal()] != -1) {
+                ghostEdibleTimeMock[ghost.ordinal()]--;
+            }
+
+            int ghostIndex = game.getGhostCurrentNodeIndex(ghost);
+            if (ghostIndex != -1) { //We see the ghost!
+                predictions.observe(ghost, ghostIndex, game.getGhostLastMoveMade(ghost));
+                ghostEdibleTimeMock[ghost.ordinal()] = game.getGhostEdibleTime(ghost);
+                //Now we'll get the move we need to do to get away from the ghost we see
+                MOVE ghostDirOpp = game.getNextMoveAwayFromTarget(game.getPacmanCurrentNodeIndex(), game.getGhostCurrentNodeIndex(ghost), DM.EUCLID);
+                if (Arrays.stream(getAllLegalMoves(game)).anyMatch(ghostDirOpp::equals) && game.getGhostEdibleTime(ghost) <= 0) { //If the move away from ghost is legal AND ghost is not edible
+                    nextMove = ghostDirOpp; //Then we force it
+                    System.out.println("I'm running from a ghost now.");
+                    System.out.println(ghostDirOpp);
+                }
+            }
+
+        }
+        return nextMove;
     }
 }
+
+
+    /*
+    //Trying new stuff
+    int[] ghostEdibleTimeMock;
+    GhostPredictionsFast predictions;
+    ghostEdibleTimeMock = new int[Constants.GHOST.values().length];
+        Arrays.fill(ghostEdibleTimeMock, -1);
+    predictions = new GhostPredictionsFast(game.getCurrentMaze()); //Predicts ghosts' movement
+        predictions.preallocate();
+        for (Constants.GHOST ghost : Constants.GHOST.values()) {
+        if (ghostEdibleTimeMock[ghost.ordinal()] != -1) {
+            ghostEdibleTimeMock[ghost.ordinal()]--;
+        }
+
+        int ghostIndex = game.getGhostCurrentNodeIndex(ghost);
+        if (ghostIndex != -1) { //We see the ghost!
+            predictions.observe(ghost, ghostIndex, game.getGhostLastMoveMade(ghost));
+            ghostEdibleTimeMock[ghost.ordinal()] = game.getGhostEdibleTime(ghost);
+            //Now we'll get the move we need to do to get away from the ghost we see
+            MOVE ghostDirOpp = game.getNextMoveAwayFromTarget(game.getPacmanCurrentNodeIndex(), game.getGhostCurrentNodeIndex(ghost), DM.PATH);
+            if (Arrays.stream(getAllLegalMoves(game)).anyMatch(ghostDirOpp::equals)) { //If the move away from ghost is legal
+                this.legalMoves = new MOVE[] {ghostDirOpp}; //Then we force it by saying it is the ONLY legal move right now
+                System.out.println("I'm running from a ghost now.");
+                System.out.println(ghostDirOpp);
+            }
+            else { //If it isn't, for example if there is a wall
+                System.out.println("Can't escape.");
+                this.legalMoves = getLegalMovesNotIncludingBackwards(game); //Then default to other moves
+            }
+        }
+        else {
+            //System.out.println("Ain't running.");
+            this.legalMoves = getLegalMovesNotIncludingBackwards(game);
+            //this.legalMoves = getAllLegalMoves(game);
+        }
+    }
+    */
+
+
