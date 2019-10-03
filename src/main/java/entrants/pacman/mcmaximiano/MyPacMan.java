@@ -15,7 +15,6 @@ import prediction.fast.GhostPredictionsFast;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.LinkedList;
 import java.util.Random;
 
 
@@ -39,7 +38,7 @@ public class MyPacMan extends PacmanController {
     private int[] ghostEdibleTime;
     protected Game mostRecentGame;
     protected int maxTreeDepth = 30; //Should play around with different values and compare results
-    protected int maxPlayoutDepth = 200; //Should play around with different values and compare results
+    protected int maxPlayoutDepth = 250; //Should play around with different values and compare results
 
     public MyPacMan() {
         ghostEdibleTime = new int[Constants.GHOST.values().length];
@@ -119,7 +118,7 @@ public class MyPacMan extends PacmanController {
         }
         predictions.update();
 
-        System.out.println(root.selectBestMove(game));
+        //System.out.println(root.selectBestMove(game));
         return root.selectBestMove(game);
     }
 
@@ -308,7 +307,7 @@ class Node {
     }
 
     private double calculateGameScore(Game game) { //Should play around with this and try to find the best formula
-        return game.getScore() + game.getTotalTime() + (1000 * game.getCurrentLevel());
+        return game.getScore()*50 + game.getTotalTime()*0.1 + (5000 * game.getCurrentLevel());
 
     }
 
@@ -353,11 +352,12 @@ class Node {
                 predictions.observe(ghost, ghostIndex, game.getGhostLastMoveMade(ghost));
                 ghostEdibleTimeMock[ghost.ordinal()] = game.getGhostEdibleTime(ghost);
                 //Now we'll get the move we need to do to get away from the ghost we see
-                MOVE ghostDirOpp = game.getNextMoveAwayFromTarget(game.getPacmanCurrentNodeIndex(), game.getGhostCurrentNodeIndex(ghost), DM.EUCLID);
+                MOVE ghostDirOpp = game.getNextMoveAwayFromTarget(game.getPacmanCurrentNodeIndex(), game.getGhostCurrentNodeIndex(ghost), DM.PATH);
                 if (Arrays.stream(getAllLegalMoves(game)).anyMatch(ghostDirOpp::equals) && game.getGhostEdibleTime(ghost) <= 0) { //If the move away from ghost is legal AND ghost is not edible
                     nextMove = ghostDirOpp; //Then we force it
-                    System.out.println("I'm running from a ghost now.");
-                    System.out.println(ghostDirOpp);
+                    //System.out.println("I'm running from a ghost now.");
+
+                    //System.out.println(ghostDirOpp);
                 }
             }
 
