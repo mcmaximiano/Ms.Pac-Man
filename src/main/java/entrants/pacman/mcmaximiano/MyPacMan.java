@@ -307,7 +307,7 @@ class Node {
     }
 
     private double calculateGameScore(Game game) { //Should play around with this and try to find the best formula
-        return game.getScore() + game.getTotalTime()*0 + (00000 * game.getCurrentLevel());
+        return game.getScore() + game.getTotalTime()*0 + (1000 * game.getCurrentLevel());
 
     }
 
