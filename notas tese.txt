@@ -1,0 +1,17 @@
+
+DOING guardar test results em excel page
+descrever como MCTS foi implementado ao pormenor
+	- estado
+	- etapas do mcts
+	- como se lida com PO
+DOING testar testar testar
+procurar equipas de ghost teams para testar contra, e de PM para comparar
+DONE minimo 30 jogos para cada teste
+DONE ver "standard error 95% confidence calculation" (upper e lower limits)
+
+Report Notes:
+
+Abstract/Resumo ToDo
+Organization of document (chapter 1 - introduction) ToDo
+
+https://www.overleaf.com/project/5d7f56f78ab2910001803037
