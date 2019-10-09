@@ -41,17 +41,9 @@ public class Main {
 
         /* For Developing MyPacMan */
         executor.runGameTimed(new MyPacMan(), new MASController(controllers));
-        /** /
-        executor.runGameTimed(new InformationSetMCTSPacMan(), new MASController(controllers));
 
         /* For mass testing * /
-        System.out.println(executor.runExperiment(new MyPacMan(), new MASController(controllers), 40, "Starter PM")[0].toString());
-        /** /
-        System.out.println(executor.runExperiment(new InformationSetMCTSPacMan(), new MASController(controllers), 5, "ISMCTS PM")[0].toString());
-
+        executor.runExperiment(new MyPacMan(), new MASController(controllers), 40, "MyPacMan");
         /**/
-
-        System.out.println("GAME OVER");
-
     }
 }

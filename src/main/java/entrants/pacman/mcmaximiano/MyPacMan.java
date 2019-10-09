@@ -324,7 +324,6 @@ class Node {
     }
 
     public MOVE getNextMove(Node child, Game game) {
-        //Trying new stuff
         int[] ghostEdibleTimeMock;
         MOVE nextMove = child.prevMove;
         GhostPredictionsFast predictions;

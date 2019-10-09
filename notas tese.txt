@@ -14,4 +14,6 @@ Report Notes:
 Abstract/Resumo ToDo
 Organization of document (chapter 1 - introduction) ToDo
 
+Não esquecer referir o metodo executor.runExperiment na parte de evaluation
+
 https://www.overleaf.com/project/5d7f56f78ab2910001803037
