@@ -30,8 +30,6 @@ import pacman.game.internal.Maze;
  */
 public class MyPacMan extends PacmanController {
 
-    //private MOVE myMove = MOVE.NEUTRAL;
-
     private Maze currentMaze;
     private GhostPredictionsFast predictions;
     private PillModel pillModel;
@@ -51,9 +49,6 @@ public class MyPacMan extends PacmanController {
             currentMaze = game.getCurrentMaze();
             predictions = null;
             pillModel = null;
-            System.out.println("New Maze");
-            int level = game.getCurrentLevel() + 1;
-            System.out.println("Level: " + level);
             Arrays.fill(ghostEdibleTime, -1);
         }
 
@@ -61,7 +56,7 @@ public class MyPacMan extends PacmanController {
 
         if (game.gameOver()) return null;
 
-        if (game.wasPacManEaten()) { //This means PM was eaten in the last time step and just respawned
+        if (game.wasPacManEaten()) { //This means PM was eaten in the last time step and just respawned, he has no memory
             predictions = null;
         }
 
@@ -154,13 +149,14 @@ class Node {
     private double score;
     private int treeDepth;
 
+
     /* Constructors */
+
     public Node(MyPacMan MyPacMan, Game game) { //Constructor for root node
         this.MyPacMan = MyPacMan;
         treeDepth = 0;
 
         this.legalMoves = getLegalMovesNotIncludingBackwards(game);
-        //this.legalMoves = getAllLegalMoves(game);
 
         this.children = new Node[legalMoves.length];
     }
@@ -174,7 +170,9 @@ class Node {
         this.children = new Node[legalMoves.length];
     }
 
+
     /* MCTS methods */
+
     public Node select_expand(Game game) {
         Node current = this;
         while (current.treeDepth < MyPacMan.maxTreeDepth && !game.gameOver()) {
@@ -294,7 +292,6 @@ class Node {
         return bestChild;
     }
 
-
     private double calculateChildScore() {
         return (score / visits) + Math.sqrt(2 * Math.log((parent.visits + 1) / visits));
     }
@@ -304,6 +301,24 @@ class Node {
 
     }
 
+    /* Other methods */
+
+    //Method initially used to select the best move
+    public MOVE selectBestMove() {
+        Node bestChild = null;
+        double bestScore = -Double.MAX_VALUE;
+        for (Node child : children) {
+            if (child == null) continue;
+            double score = child.score;
+            if (score > bestScore) {
+                bestChild = child;
+                bestScore = score;
+            }
+        }
+        return bestChild == null ? MOVE.NEUTRAL : bestChild.prevMove;
+    }
+
+    //The Adaptation
     public MOVE selectBestMove(Game game) {
         Node bestChild = null;
         double bestScore = -Double.MAX_VALUE;
